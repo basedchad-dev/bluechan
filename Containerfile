@@ -1,4 +1,4 @@
-FROM quay.io/fedora-ostree-desktops/silverblue:43
+FROM quay.io/fedora/fedora-silverblue:43
 
 # Copy system configuration files (repos, services, etc)
 COPY sys_files/ /
@@ -9,6 +9,6 @@ RUN systemctl enable install-flatpaks.service
 RUN rpm-ostree install \
     distrobox \
     thinkfan \
-    google-chrome-stable \
-    && rpm-ostree cleanup -m \
+#    google-chrome-stable \
+#    && rpm-ostree cleanup -m \
     && ostree container commit
