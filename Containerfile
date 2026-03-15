@@ -9,6 +9,6 @@ RUN systemctl enable install-flatpaks.service
 RUN rpm-ostree install \
     distrobox \
     thinkfan \
-#    google-chrome-stable \
+    google-chrome-stable \
 #    && rpm-ostree cleanup -m \
     && ostree container commit
