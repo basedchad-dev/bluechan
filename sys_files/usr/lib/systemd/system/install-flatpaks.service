@@ -1,0 +1,20 @@
+[Unit]
+Description=Install Flatpaks on First Boot
+After=network-online.target
+Wants=network-online.target
+# Alternative way of managing this
+# ConditionFirstBoot=yes
+ConditionPathExists=!/var/lib/flatpak/.bluechan-initialized
+
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+ExecStart=/usr/bin/flatpak install -y flathub org.videolan.VLC com.obsproject.Studio
+ExecStartPost=/usr/bin/mkdir -p /var/lib/flatpak
+ExecStartPost=/usr/bin/touch /var/lib/flatpak/.bluechan-initialized
+# ExecStartPost=/usr/bin/systemctl disable install-flatpaks.service
+
+[Install]
+WantedBy=multi-user.target
